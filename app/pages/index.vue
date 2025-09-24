@@ -41,7 +41,7 @@ function formatPart(part: UIMessagePart<UIDataTypes, UITools>): string | undefin
 
 <template>
     <div class="min-h-screen w-full flex items-center justify-center">
-        <div class="max-w-4xl mx-auto p-6 relative size-full rounded-lg border h-[600px] flex flex-col">
+        <div class="max-w-4xl mx-auto p-6 relative size-full rounded-lg border h-[800px] flex flex-col">
             <div class="flex-1 overflow-y-auto">
                 <Conversation>
                     <ConversationContent>
@@ -68,6 +68,7 @@ function formatPart(part: UIMessagePart<UIDataTypes, UITools>): string | undefin
                     <PromptInputTextarea
                         v-model="input"
                         placeholder="Say something..."
+                        autofocus=""
                     />
                     <PromptInputSubmit 
                         :status="chat.status === 'streaming' ? 'streaming' : 'ready'"
