@@ -34,7 +34,10 @@ const handleSubmit = () => {
                 :key="`${m.id}-${part.type}-${partIdx}`"
             >
                 <div v-if="part.type === 'text'">{{ part.text }}</div>
-                <pre v-if="part.type === 'dynamic-tool'">{{ JSON.stringify(part, null, 2) }}</pre>
+                <div v-if="part.type === 'dynamic-tool'">
+                    <span>Calling tool: </span><pre style="display: inline;">{{ part.toolName }}</pre>
+                    <pre>{{ JSON.stringify(part.input, null, 2) }}</pre>
+                </div>
             </div>
         </div>
 
