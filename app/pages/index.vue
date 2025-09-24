@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Chat } from "@ai-sdk/vue";
 import { DefaultChatTransport } from "ai";
+import { Input } from "@/components/ui/input";
 
 const input = ref("");
 const chat = new Chat({
@@ -26,7 +27,7 @@ const handleSubmit = () => {
 </script>
 
 <template>
-    <div>
+    <div class="p-5">
         <div v-for="(m, messageIdx) in chat.messages" :key="m.id ? m.id : messageIdx">
             {{ m.role === "user" ? "User: " : "AI: " }}
             <div
@@ -42,7 +43,7 @@ const handleSubmit = () => {
         </div>
 
         <form @submit.prevent="handleSubmit">
-            <input v-model="input" placeholder="Say something...">
+            <Input v-model="input" placeholder="Say something..." />
         </form>
     </div>
 </template>
