@@ -9,14 +9,14 @@ import { streamText, UIMessage, convertToModelMessages, stepCountIs } from 'ai';
 import { createAmazonBedrock } from '@ai-sdk/amazon-bedrock';
 import { PREDEFINED_SYSTEM_PROMPT } from '../shared/prompts/predefined';
 
-const S3_BUCKET_NAME = process.env['S3_BUCKET_NAME'];
-const DATABASE_NAME = process.env['DATABASE_NAME'];
-const TABLE_NAME = process.env['TABLE_NAME'];
-
 const AGENT_MODEL = 'anthropic.claude-3-5-sonnet-20240620-v1:0';
 const EMBEDDING_MODEL = 'amazon.titan-embed-text-v2:0';
 
 async function retrieveKnowledgeFromDB(query: string): Promise<string> {
+  const S3_BUCKET_NAME = process.env['S3_BUCKET_NAME'];
+  const DATABASE_NAME = process.env['DATABASE_NAME'];
+  const TABLE_NAME = process.env['TABLE_NAME'];
+
   let context = '';
 
   if (!S3_BUCKET_NAME || !DATABASE_NAME || !TABLE_NAME) {

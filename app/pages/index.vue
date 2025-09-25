@@ -63,7 +63,7 @@ function formatPart(part: UIMessagePart<UIDataTypes, UITools>): string | undefin
                 </Conversation>
             </div>
 
-            <div class="mt-4 w-full max-w-2xl mx-auto">
+            <div class="mt-4 w-full max-w-2xl mx-auto relative">
                 <PromptInput @submit.prevent="handleSubmit">
                     <PromptInputTextarea
                         v-model="input"
