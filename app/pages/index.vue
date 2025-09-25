@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { Chat } from "@ai-sdk/vue";
-import { DefaultChatTransport, type UIDataTypes, type UIMessagePart, type UITools } from "ai";
+import {
+    DefaultChatTransport,
+    type UIDataTypes,
+    type UIMessagePart,
+    type UITools,
+} from "ai";
 
 import {
     Conversation,

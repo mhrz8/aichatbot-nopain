@@ -1,5 +1,5 @@
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
-import { LanceDB }from "@langchain/community/vectorstores/lancedb";
+import { LanceDB } from "@langchain/community/vectorstores/lancedb";
 import { connect } from '@lancedb/lancedb';
 import { BedrockEmbeddings } from "@langchain/aws";
 import { formatDocumentsAsString } from "langchain/util/document";
@@ -16,7 +16,7 @@ async function retrieveKnowledgeFromDB(query: string): Promise<string> {
   const S3_BUCKET_NAME = process.env['S3_BUCKET_NAME'];
   const DATABASE_NAME = process.env['DATABASE_NAME'];
   const TABLE_NAME = process.env['TABLE_NAME'];
-
+  
   let context = '';
 
   if (!S3_BUCKET_NAME || !DATABASE_NAME || !TABLE_NAME) {
@@ -32,8 +32,8 @@ async function retrieveKnowledgeFromDB(query: string): Promise<string> {
     const vectorStore = new LanceDB(embeddings, { table });
     const retriever = vectorStore.asRetriever();
 
-      const docs = await retriever.invoke(query);
-      context = formatDocumentsAsString(docs);
+    const docs = await retriever.invoke(query);
+    context = formatDocumentsAsString(docs);
   } catch (error) {
     console.error('Failed retrieving the context');
   }
@@ -61,7 +61,7 @@ export default defineLazyEventHandler(async () => {
 
     let context = '';
     if (lastMessagePart.type === 'text') {
-      context = await retrieveKnowledgeFromDB(lastMessagePart.text)
+      context = await retrieveKnowledgeFromDB(lastMessagePart.text);
     }
 
     // Step 1. List of available tools from MCP Server(s)
@@ -71,7 +71,7 @@ export default defineLazyEventHandler(async () => {
     // Step 2. Build system prompt
     let systemPrompt = `
 You are a helpful AI assistant that answers using **provided context** and **available tools**.
-## Available MCP servers and their capabilities:
+## Available MCP capabilities:
 `;
     for (const [name, tool] of Object.entries(tools)) {
       systemPrompt += `  - ${name}: ${tool.description}\n`;
